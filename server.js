@@ -29,7 +29,6 @@ const swaggerOptions = {
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// MongoDB connection
 const dbURI =
   "mongodb+srv://abineshwaran1255:r2YZosF2ZKKxCrtg@cluster0.gpxjtea.mongodb.net/swagger?retryWrites=true&w=majority&appName=Cluster0";
 mongoose
