@@ -15,7 +15,7 @@ const orderController = require("../controllers/orderController");
  *     summary: Retrieve all orders
  *     description: Retrieve all orders from the database.
  *     tags:
- *       [Orders]
+ *        [Orders]
  *     responses:
  *       '200':
  *         description: Successfully retrieved orders

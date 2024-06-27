@@ -9,6 +9,9 @@ const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+const path = require("path");
+ 
+app.use(express.static(path.join(__dirname, "public")));
 
 // Swagger configuration
 const swaggerOptions = {
