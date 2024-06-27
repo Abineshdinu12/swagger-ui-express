@@ -39,13 +39,52 @@ router.get("/products/:id", productController.getProductById);
  * @openapi
  * /api/products:
  *   post:
- *     description: Create a new product
+ *     summary: Create a new product
+ *     description: Create a new product with the specified name, price, and description.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           examples:
+ *             productExample:
+ *               value:
+ *                 name: Product Name
+ *                 price: 29.99
+ *                 description: Product description.
  *     responses:
- *       201:
+ *       '201':
  *         description: Product successfully created
- *       400:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: 60dc1a2c6b09a83e3c3a7e29
+ *                 productName:
+ *                   type: string
+ *                   example:  Name
+ *                 price:
+ *                   type: number
+ *                   format: float
+ *                   example: 29.99
+ *                 description:
+ *                   type: string
+ *                   example: Product description.
+ *       '400':
  *         description: Unable to create product
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: 
+ *                    Validation error: Missing required fields.
  */
+
 router.post("/products", productController.createProduct);
 
 /**

@@ -1,13 +1,9 @@
 const Product = require("../models/productModel");
-const axios = require('axios');
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    const apiData = response.data;
-
-    // Return the fetched API data as products
-    res.json(apiData);
+    const products = await Product.find();
+    res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -17,35 +13,35 @@ exports.getProductById = async (req, res) => {
   const productId = req.params.id;
 
   try {
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${productId}`);
-    const product = response.data;
-
-    // Check if the product exists
+    const product = await Product.findById(productId);
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
-
     res.json(product);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 exports.createProduct = async (req, res) => {
-  const { name, price, description } = req.body;
+  console.log(req.body); 
+
+  const { productName, price, description } = req.body;
   try {
-    const newProduct = await Product.create({ name, price, description });
+    const newProduct = await Product.create({ productName, price, description });
     res.status(201).json(newProduct);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+
 exports.updateProduct = async (req, res) => {
-  const { name, price, description } = req.body;
+  const { productName, price, description } = req.body;
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      { name, price, description },
+      { productName, price, description },
       { new: true }
     );
     if (!updatedProduct) {
