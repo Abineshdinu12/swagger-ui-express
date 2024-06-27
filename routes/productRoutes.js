@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/productController");
-
+/**
+ * @openapi
+ * tags:
+ *   name: Products
+ *   description: APIs related to Products
+ */
 /**
  * @openapi
  * /api/products:
  *   get:
  *     description: Retrieve all products
+ *     tags:
+ *       [Products]
  *     responses:
  *       200:
  *         description: Successfully retrieved products
@@ -20,6 +27,8 @@ router.get("/products", productController.getAllProducts);
  * /api/products/{id}:
  *   get:
  *     description: Retrieve a single product by ID
+ *     tags:
+ *       [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -41,48 +50,20 @@ router.get("/products/:id", productController.getProductById);
  *   post:
  *     summary: Create a new product
  *     description: Create a new product with the specified name, price, and description.
+ *     tags:
+ *       [Products]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
- *           examples:
- *             productExample:
- *               value:
- *                 name: Product Name
- *                 price: 29.99
- *                 description: Product description.
+ *          schema:
+ *             $ref: '../models/productModel.js'
  *     responses:
  *       '201':
  *         description: Product successfully created
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 _id:
- *                   type: string
- *                   example: 60dc1a2c6b09a83e3c3a7e29
- *                 productName:
- *                   type: string
- *                   example:  Name
- *                 price:
- *                   type: number
- *                   format: float
- *                   example: 29.99
- *                 description:
- *                   type: string
- *                   example: Product description.
  *       '400':
  *         description: Unable to create product
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: 
- *                    Validation error: Missing required fields.
+ *         
  */
 
 router.post("/products", productController.createProduct);
@@ -92,6 +73,8 @@ router.post("/products", productController.createProduct);
  * /api/products/{id}:
  *   put:
  *     description: Update a product by ID
+ *     tags:
+ *       [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -114,6 +97,8 @@ router.put("/products/:id", productController.updateProduct);
  * /api/products/{id}:
  *   delete:
  *     description: Delete a product by ID
+ *     tags:
+ *       [Products]
  *     parameters:
  *       - in: path
  *         name: id

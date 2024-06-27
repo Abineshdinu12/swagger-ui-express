@@ -24,12 +24,17 @@ exports.getProductById = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
-  console.log(req.body); 
+  console.log(req.body);
+  //  const productName = "sample";
+  //  const price = 2.00;
+  //  const description = "hi"
 
   const { productName, price, description } = req.body;
   try {
     const newProduct = await Product.create({ productName, price, description });
-    res.status(201).json(newProduct);
+    res.status(201).json({
+      success:true
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -53,13 +58,15 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
+
+
 exports.deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     if (!deletedProduct) {
       return res.status(404).json({ error: "Product not found" });
     }
-    res.status(204).end();
+    res.status(204).json({ message: "Deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
