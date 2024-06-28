@@ -1,0 +1,261 @@
+openapi: 3.0.0
+info:
+  title: Location API
+  version: 1.0.0
+tags:
+  - name: Location
+    description: APIs related to Location
+paths:
+  /api/Location:
+    get:
+      description: Retrieve all locations
+      tags:
+        - Location
+      responses:
+        "200":
+          description: Successfully retrieved locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "1"
+                    name:
+                      type: string
+                      example: "Location A"
+                    description:
+                      type: string
+                      example: "Description of Location A"
+                    price:
+                      type: number
+                      example: 99.99
+              examples:
+                example1:
+                  summary: Example of retrieving all locations
+                  value:
+                    - id: "1"
+                      name: "Location A"
+                      description: "Description of Location A"
+                      price: 99.99
+                example2:
+                  summary: Another example of retrieving all locations
+                  value:
+                    - id: "2"
+                      name: "Location B"
+                      description: "Description of Location B"
+                      price: 149.99
+                example3:
+                  summary: No locations example
+                  value: []
+
+    post:
+      summary: Create a new location
+      description: Create a new location with the specified name, price, and description.
+      tags:
+        - Location
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "New Location"
+                description:
+                  type: string
+                  example: "Description of New Location"
+                price:
+                  type: number
+                  example: 129.99
+      responses:
+        "201":
+          description: Location successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "3"
+                  message:
+                    type: string
+                    example: "Location created successfully"
+        "400":
+          description: Unable to create location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid data provided"
+
+  /api/Location/{id}:
+    get:
+      description: Retrieve a single location by ID
+      tags:
+        - Location
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Location ID
+      responses:
+        "200":
+          description: Successfully retrieved the location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "1"
+                  name:
+                    type: string
+                    example: "Location A"
+                  description:
+                    type: string
+                    example: "Description of Location A"
+                  price:
+                    type: number
+                    example: 99.99
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Location not found"
+
+    put:
+      description: Update a location by ID
+      tags:
+        - Location
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Location ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated Location A"
+                description:
+                  type: string
+                  example: "Updated description of Location A"
+                price:
+                  type: number
+                  example: 109.99
+      responses:
+        "200":
+          description: Location successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Location updated successfully"
+        "400":
+          description: Unable to update location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid data provided"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Location not found"
+
+    delete:
+      description: Delete a location by ID
+      tags:
+        - Location
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Location ID
+      responses:
+        "204":
+          description: Location successfully deleted
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Location not found"
+
+  /api/Location/delete/{id}:
+    put:
+      summary: Soft delete a location by ID
+      description: Soft delete operation for a location by marking it as inactive.
+      tags:
+        - Location
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Location ID
+      responses:
+        "200":
+          description: Location successfully soft deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Location soft deleted successfully"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Location not found"

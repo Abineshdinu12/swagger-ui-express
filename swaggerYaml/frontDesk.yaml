@@ -1,0 +1,212 @@
+openapi: 3.0.0
+info:
+  title: Frontdesk Masters API
+  version: 1.0.0
+tags:
+  - name: FrontdeskMasters
+    description: APIs related to Frontdesk Masters
+
+paths:
+  /api/frontdeskmasters:
+    get:
+      summary: Retrieve all frontdesk masters
+      tags:
+        - FrontdeskMasters
+      responses:
+        '200':
+          description: Successfully retrieved frontdesk masters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "1"
+                    firstName:
+                      type: string
+                      example: "John"
+                    lastName:
+                      type: string
+                      example: "Doe"
+                    email:
+                      type: string
+                      example: "john.doe@example.com"
+                    phone:
+                      type: string
+                      example: "+1234567890"
+                    role:
+                      type: string
+                      example: "Frontdesk Executive"
+                  
+    post:
+      summary: Create a new frontdesk master
+      tags:
+        - FrontdeskMasters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: "John"
+                lastName:
+                  type: string
+                  example: "Doe"
+                email:
+                  type: string
+                  example: "john.doe@example.com"
+                phone:
+                  type: string
+                  example: "+1234567890"
+                role:
+                  type: string
+                  example: "Frontdesk Executive"
+      responses:
+        '201':
+          description: Frontdesk master successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "1"
+                  message:
+                    type: string
+                    example: "Frontdesk master created successfully"
+
+  /api/frontdeskmasters/{id}:
+    get:
+      summary: Retrieve a frontdesk master by ID
+      tags:
+        - FrontdeskMasters
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Frontdesk master ID
+      responses:
+        '200':
+          description: Successfully retrieved the frontdesk master
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "1"
+                  firstName:
+                    type: string
+                    example: "John"
+                  lastName:
+                    type: string
+                    example: "Doe"
+                  email:
+                    type: string
+                    example: "john.doe@example.com"
+                  phone:
+                    type: string
+                    example: "+1234567890"
+                  role:
+                    type: string
+                    example: "Frontdesk Executive"
+        '404':
+          description: Frontdesk master not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Frontdesk master not found"
+
+    put:
+      summary: Update a frontdesk master by ID
+      tags:
+        - FrontdeskMasters
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Frontdesk master ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: "John"
+                lastName:
+                  type: string
+                  example: "Doe"
+                email:
+                  type: string
+                  example: "john.doe@example.com"
+                phone:
+                  type: string
+                  example: "+1234567890"
+                role:
+                  type: string
+                  example: "Frontdesk Executive"
+      responses:
+        '200':
+          description: Frontdesk master successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Frontdesk master updated successfully"
+        '404':
+          description: Frontdesk master not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Frontdesk master not found"
+
+    delete:
+      summary: Delete a frontdesk master by ID
+      tags:
+        - FrontdeskMasters
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Frontdesk master ID
+      responses:
+        '204':
+          description: Frontdesk master successfully deleted
+        '404':
+          description: Frontdesk master not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Frontdesk master not found"

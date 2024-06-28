@@ -10,11 +10,16 @@ const loadYaml = (filePath) => {
 
 const products = loadYaml("./swaggerYaml/products.yaml");
 const orders = loadYaml("./swaggerYaml/order.yaml");
-const services = loadYaml('./swaggerYaml/service.yaml')
-
+const services = loadYaml("./swaggerYaml/service.yaml");
+const location = loadYaml("./swaggerYaml/location.yaml");
+const company = loadYaml("./swaggerYaml/company.yaml")
+const frontdesk = loadYaml("./swaggerYaml/frontDesk.yaml")
 module.exports = {
   products,
   orders,
   services,
+  location,
+  company,
+  frontdesk,
   swaggerUi,
 };

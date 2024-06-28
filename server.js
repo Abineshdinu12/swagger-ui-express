@@ -10,12 +10,23 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const path = require("path");
-const { swaggerUi, products, orders, services } = require("./swagger");
+const {
+  swaggerUi,
+  products,
+  orders,
+  services,
+  location,
+  frontdesk,
+  company
+} = require("./swagger");
 
 const swaggerDefinitions = {
   products,
   orders,
   services,
+  location,
+  frontdesk,
+  company
 };
 
 app.use(express.static(path.join(__dirname, "public")));
