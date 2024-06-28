@@ -1,0 +1,163 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Example API 
+  version: 1.0.0
+paths:
+  /:
+    post:
+      summary: Add a new service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "New Service"
+                description:
+                  type: string
+                  example: "Description of New Service"
+                price:
+                  type: number
+                  example: 149.99
+                active:
+                  type: boolean
+                  example: true
+      responses:
+        '200':
+          description: Service added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Service added"
+
+    get:
+      summary: Get all services
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: "5c8f0c4da0f2b106b431b50c"
+                    name:
+                      type: string
+                      example: "Service 1"
+                    description:
+                      type: string
+                      example: "Description of Service 1"
+                    price:
+                      type: number
+                      example: 99.99
+                    active:
+                      type: boolean
+                      example: true
+
+  /{id}:
+    get:
+      summary: Get service by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            example: "5c8f0c4da0f2b106b431b50c"
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "5c8f0c4da0f2b106b431b50c"
+                  name:
+                    type: string
+                    example: "Service 1"
+                  description:
+                    type: string
+                    example: "Description of Service 1"
+                  price:
+                    type: number
+                    example: 99.99
+                  active:
+                    type: boolean
+                    example: true
+
+    put:
+      summary: Update service
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            example: "5c8f0c4da0f2b106b431b50c"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated Service 1"
+                description:
+                  type: string
+                  example: "Updated Description of Service 1"
+                price:
+                  type: number
+                  example: 129.99
+                active:
+                  type: boolean
+                  example: true
+      responses:
+        '200':
+          description: Service updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Service updated"
+
+    delete:
+      summary: Delete service by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            example: "5c8f0c4da0f2b106b431b50c"
+      responses:
+        '200':
+          description: Service deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Service deleted"
+  

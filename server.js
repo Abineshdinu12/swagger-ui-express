@@ -1,48 +1,53 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const serviceRoutes = require("./routes/serviceRoute");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const path = require("path");
- 
+const { swaggerUi, products, orders, services } = require("./swagger");
+
+const swaggerDefinitions = {
+  products,
+  orders,
+  services,
+};
+
 app.use(express.static(path.join(__dirname, "public")));
 
-// Swagger configuration
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Product API",
-      version: "1.0.0",
-      description: "API documentation for Product Management",
-    },
-    servers: [
-      {
-        url: "http://localhost:3000",
-      },
-    ],
-  },
-  apis: ["./routes/*.js"],
-};
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.get("/swagger.json", async (req, res) => {
+  const api = req.query.api;
+
+  try {
+    if (!swaggerDefinitions[api]) {
+      throw new Error("API not found");
+    }
+
+    res.json(swaggerDefinitions[api]);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+});
 
 const dbURI =
   "mongodb+srv://abineshwaran1255:r2YZosF2ZKKxCrtg@cluster0.gpxjtea.mongodb.net/swagger?retryWrites=true&w=majority&appName=Cluster0";
 mongoose
-  .connect(dbURI, {
-  })
+  .connect(dbURI, {})
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use("/api", productRoutes);
-app.use("/api", orderRoutes);
+app.use("/api-docs/:id", swaggerUi.serve, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.use("/", productRoutes);
+app.use("/", orderRoutes);
+app.use("/", serviceRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
