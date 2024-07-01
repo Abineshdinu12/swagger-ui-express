@@ -3,7 +3,7 @@ info:
   title: Frontdesk Masters API
   version: 1.0.0
 tags:
-  - name: FrontdeskMasters
+  - name: Front desk Masters
     description: APIs related to Frontdesk Masters
 
 paths:
@@ -11,9 +11,9 @@ paths:
     get:
       summary: Retrieve all frontdesk masters
       tags:
-        - FrontdeskMasters
+        - Front desk Masters
       responses:
-        '200':
+        "200":
           description: Successfully retrieved frontdesk masters
           content:
             application/json:
@@ -40,11 +40,11 @@ paths:
                     role:
                       type: string
                       example: "Frontdesk Executive"
-                  
+
     post:
       summary: Create a new frontdesk master
       tags:
-        - FrontdeskMasters
+        - Front desk Masters
       requestBody:
         required: true
         content:
@@ -68,7 +68,7 @@ paths:
                   type: string
                   example: "Frontdesk Executive"
       responses:
-        '201':
+        "201":
           description: Frontdesk master successfully created
           content:
             application/json:
@@ -86,7 +86,7 @@ paths:
     get:
       summary: Retrieve a frontdesk master by ID
       tags:
-        - FrontdeskMasters
+        - Front desk Masters
       parameters:
         - in: path
           name: id
@@ -95,7 +95,7 @@ paths:
             type: string
           description: Frontdesk master ID
       responses:
-        '200':
+        "200":
           description: Successfully retrieved the frontdesk master
           content:
             application/json:
@@ -120,7 +120,7 @@ paths:
                   role:
                     type: string
                     example: "Frontdesk Executive"
-        '404':
+        "404":
           description: Frontdesk master not found
           content:
             application/json:
@@ -134,7 +134,7 @@ paths:
     put:
       summary: Update a frontdesk master by ID
       tags:
-        - FrontdeskMasters
+        - Front desk Masters
       parameters:
         - in: path
           name: id
@@ -165,7 +165,7 @@ paths:
                   type: string
                   example: "Frontdesk Executive"
       responses:
-        '200':
+        "200":
           description: Frontdesk master successfully updated
           content:
             application/json:
@@ -175,7 +175,7 @@ paths:
                   message:
                     type: string
                     example: "Frontdesk master updated successfully"
-        '404':
+        "404":
           description: Frontdesk master not found
           content:
             application/json:
@@ -189,7 +189,7 @@ paths:
     delete:
       summary: Delete a frontdesk master by ID
       tags:
-        - FrontdeskMasters
+        - Front desk Masters
       parameters:
         - in: path
           name: id
@@ -198,9 +198,9 @@ paths:
             type: string
           description: Frontdesk master ID
       responses:
-        '204':
+        "204":
           description: Frontdesk master successfully deleted
-        '404':
+        "404":
           description: Frontdesk master not found
           content:
             application/json:
@@ -210,3 +210,37 @@ paths:
                   message:
                     type: string
                     example: "Frontdesk master not found"
+  /api/frontdeskmasters/delete/{id}:
+    delete:
+      summary: Soft delete a Frontdesk by ID
+      operationId: softDelete Frontdesk ById
+      tags:
+        - Front desk Masters
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Frontdesk ID
+      responses:
+        "200":
+          description: Frontdesk successfully soft deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Frontdesk soft deleted successfully"
+        "404":
+          description: Frontdesk not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Frontdesk not found"

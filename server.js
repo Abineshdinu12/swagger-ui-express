@@ -16,8 +16,9 @@ const {
   orders,
   services,
   location,
-  frontdesk,
-  company
+  frontDesk,
+  company,
+  timeFrame,
 } = require("./swagger");
 
 const swaggerDefinitions = {
@@ -25,8 +26,9 @@ const swaggerDefinitions = {
   orders,
   services,
   location,
-  frontdesk,
-  company
+  frontDesk,
+  company,
+  timeFrame
 };
 
 app.use(express.static(path.join(__dirname, "public")));

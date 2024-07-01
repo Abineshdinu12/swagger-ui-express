@@ -12,14 +12,16 @@ const products = loadYaml("./swaggerYaml/products.yaml");
 const orders = loadYaml("./swaggerYaml/order.yaml");
 const services = loadYaml("./swaggerYaml/service.yaml");
 const location = loadYaml("./swaggerYaml/location.yaml");
-const company = loadYaml("./swaggerYaml/company.yaml")
-const frontdesk = loadYaml("./swaggerYaml/frontDesk.yaml")
+const company = loadYaml("./swaggerYaml/company.yaml");
+const frontDesk = loadYaml("./swaggerYaml/frontDesk.yaml");
+const timeFrame = loadYaml ('./swaggerYaml/timeFrame.yaml')
 module.exports = {
   products,
   orders,
   services,
   location,
   company,
-  frontdesk,
+  frontDesk,
+  timeFrame,
   swaggerUi,
 };
