@@ -14,7 +14,14 @@ const services = loadYaml("./swaggerYaml/service.yaml");
 const location = loadYaml("./swaggerYaml/location.yaml");
 const company = loadYaml("./swaggerYaml/company.yaml");
 const frontDesk = loadYaml("./swaggerYaml/frontDesk.yaml");
-const timeFrame = loadYaml ('./swaggerYaml/timeFrame.yaml')
+const timeFrame = loadYaml("./swaggerYaml/timeFrame.yaml");
+const rightHip = loadYaml("./swaggerYaml/rightHip.yaml");
+const leftHip = loadYaml("./swaggerYaml/leftHip.yaml");
+const rightKnee = loadYaml("./swaggerYaml/rightKnee.yaml");
+const leftKnee = loadYaml("./swaggerYaml/leftKnee.yaml");
+const rightLeg = loadYaml("./swaggerYaml/rightLeg.yaml");
+const leftLeg = loadYaml("./swaggerYaml/leftLeg.yaml");
+
 module.exports = {
   products,
   orders,
@@ -23,5 +30,11 @@ module.exports = {
   company,
   frontDesk,
   timeFrame,
+  rightHip,
+  leftHip,
+  rightKnee,
+  leftKnee,
+  rightLeg,
+  leftLeg,
   swaggerUi,
 };

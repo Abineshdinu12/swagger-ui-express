@@ -1,0 +1,88 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Express API Documentation"
+paths:
+  /api/ancr/right_knee:
+    get:
+      tags:
+        - Right Knee Operations
+      summary: Retrieve all data for right knee
+      operationId: findAllRightKnee
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: ""
+    post:
+      tags:
+        - Right Knee Operations
+      summary: Add new data for right knee
+      operationId: addDataRightKnee
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: ""
+            example:
+              id:
+               type: string
+               name:
+                 type: string
+    
+           
+                
+      
+      responses:
+        200:
+          description: Successful operation
+  /api/ancr/right_knee/{id}:
+      get:
+        tags:
+          - Right Knee Operations
+        summary: Retrieve data for right knee by ID
+        operationId: findbyidRightKnee
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: Successful operation
+            schema:
+              $ref: ""
+      delete:
+        tags:
+          - Right Knee Operations
+        summary: Delete data for right knee by ID
+        operationId: delDataRightKnee
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+        responses:
+          200:
+            description: Successful operation
+      put:
+        tags:
+          - Right Knee Operations
+        summary: Update data for right knee by ID
+        operationId: updateDataRightKnee
+        parameters:
+          - name: id
+            in: path
+            required: true
+            type: string
+          - in: body
+            name: body
+            required: true
+            schema:
+              $ref: ""
+        responses:
+          200:
+            description: Successful operation

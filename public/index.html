@@ -1,76 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Swagger UI</title>
-    <!-- Load Swagger UI CSS -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <style>
-      .select-api {
-        position: absolute;
-        left: 85%;
-        width: 20vw;
-        transform: translate(-50%, -50%);
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swagger UI</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <style>
+    .select-api {
+      position: absolute;
+      left: 85%;
+      width: 20vw;
+      transform: translate(-50%, -50%);
+    }
+    #swagger-ui {
+      min-height: 80vh;
+    }
+  </style>
+</head>
+<body>
+  <select id="api-select" class="select-api form-select" aria-label="Select API">
+    <option value="orders">Orders API</option>
+    <option value="services">Services API</option>
+    <option value="location">Location 🗺</option>
+    <option value="company">Company</option>
+    <option value="frontDesk">FrontDesk</option>
+    <option value="timeFrame">Time Frame</option>
+    <option value="rightHip">Right Hip</option>
+    <option value="leftHip">Left Hip</option>
+    <option value="rightKnee">Right Knee</option>
+    <option value="leftKnee">Left Knee</option>
+    <option value="rightLeg">Right Leg</option>
+    <option value="leftLeg">Left Leg</option>
+  </select>
+  <div id="swagger-ui"></div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-standalone-preset.min.js"></script>
 
-      #swagger-ui {
-        min-height: 80vh;
-      }
-    </style>
-  </head>
+  <script>
+    function initSwagger(api) {
+      const ui = SwaggerUIBundle({
+        url: `/swagger.json?api=${api}`,
+        dom_id: "#swagger-ui",
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+        layout: "BaseLayout",
+        deepLinking: true,
+      });
 
-  <body>
-    <select
-      id="api-select"
-      class="select-api form-select"
-      aria-label="Select API"
-    >
-      <option value="orders">Orders API</option>
-      <option value="products">Products API</option>
-      <option value="services">Services API</option>
-      <option value="location">Location Api 📍</option>
-      <option value="company">Company API</option>
-      <option value="frontDesk">FrontDesk API</option>
-      <option value="timeFrame">Time Frame</option>
-    </select>
-    <div id="swagger-ui"></div>
+      window.ui = ui;
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-standalone-preset.min.js"></script>
+    document.getElementById("api-select").addEventListener("change", function (event) {
+      const selectedApi = event.target.value;
+      history.pushState(null, null, `/api-docs/${selectedApi}`);
+      initSwagger(selectedApi);
+    });
 
-    <script>
-      function initSwagger(api) {
-        const ui = SwaggerUIBundle({
-          url: `/swagger.json?api=${api}`,
-          dom_id: "#swagger-ui",
-          presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
-          layout: "BaseLayout",
-          deepLinking: true,
-        });
-
-        window.ui = ui;
-      }
-
-      document
-        .getElementById("api-select")
-        .addEventListener("change", function (event) {
-          const selectedApi = event.target.value;
-          history.pushState(null, null, `/api-docs/${selectedApi}`);
-          initSwagger(selectedApi);
-        });
-
-      initSwagger("orders");
-    </script>
-  </body>
+    initSwagger("orders"); // Initial load with 'orders' API
+  </script>
+</body>
 </html>

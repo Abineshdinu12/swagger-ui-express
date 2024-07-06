@@ -19,6 +19,12 @@ const {
   frontDesk,
   company,
   timeFrame,
+  rightHip,
+  leftHip,
+  rightKnee,
+  leftKnee,
+  rightLeg,
+  leftLeg,
 } = require("./swagger");
 
 const swaggerDefinitions = {
@@ -28,7 +34,13 @@ const swaggerDefinitions = {
   location,
   frontDesk,
   company,
-  timeFrame
+  timeFrame,
+  rightHip,
+  leftHip,
+  rightKnee,
+  leftKnee,
+  rightLeg,
+  leftLeg,
 };
 
 app.use(express.static(path.join(__dirname, "public")));

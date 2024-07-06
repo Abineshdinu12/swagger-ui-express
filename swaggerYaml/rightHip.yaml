@@ -1,0 +1,83 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Express API Documentation"
+paths:
+  /api/ancr/right_hip:
+    get:
+      tags:
+        - Right_hip
+      summary: Retrieve all data
+      operationId: findAll
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: ""
+    post:
+      tags:
+        - Right_hip
+      summary: Example of adding new data
+      operationId: addData
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: ""
+            example:
+              id: "1"
+
+      responses:
+        200:
+          description: Successful operation
+  /api/ancr/right_hip/{id}:
+    get:
+      tags:
+        - Right_hip
+      summary: Retrieve data by ID
+      operationId: findbyid
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: ""
+    delete:
+      tags:
+        - Right_hip
+      summary: Delete data by ID
+      operationId: delData
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+    post:
+      tags:
+        - Right_hip
+      summary: Update data by ID
+      operationId: updateData
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: ""
+      responses:
+        200:
+          description: Successful operation
+
